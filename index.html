@@ -103,6 +103,11 @@
         const leftArrow = document.querySelector('.arrow.left');
         const rightArrow = document.querySelector('.arrow.right');
 
+        // Function to subtract 3 from the number in the URL
+        function adjustImageUrl(url) {
+            return url.replace(/(\d+)(?=\/image\.jpg$)/, (match) => parseInt(match, 10) - 3);
+        }
+
         // Get the URL parameters
         const params = new URLSearchParams(window.location.search);
 
@@ -123,7 +128,7 @@
 
             img.addEventListener('click', () => {
                 currentImageIndex = index; // Set the current index to the clicked image
-                modalImg.src = imageUrls[currentImageIndex];
+                modalImg.src = adjustImageUrl(imageUrls[currentImageIndex]);
                 modal.style.display = 'flex';
             });
 
@@ -138,13 +143,13 @@
         // Navigate to the previous image
         leftArrow.addEventListener('click', () => {
             currentImageIndex = (currentImageIndex > 0) ? currentImageIndex - 1 : imageUrls.length - 1;
-            modalImg.src = imageUrls[currentImageIndex];
+            modalImg.src = adjustImageUrl(imageUrls[currentImageIndex]);
         });
 
         // Navigate to the next image
         rightArrow.addEventListener('click', () => {
             currentImageIndex = (currentImageIndex < imageUrls.length - 1) ? currentImageIndex + 1 : 0;
-            modalImg.src = imageUrls[currentImageIndex];
+            modalImg.src = adjustImageUrl(imageUrls[currentImageIndex]);
         });
 
         // Close the modal when clicking outside the modal content
