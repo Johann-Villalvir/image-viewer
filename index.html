@@ -95,31 +95,27 @@
 
     <script>
         let currentImageIndex = 0;
-        let imageUrls = []; // Array to store all image URLs
+        let imageUrls = []; // Array to store all image URLs from query parameters
         const modal = document.getElementById('modal');
         const modalImg = document.getElementById('modal-img');
         const closeModal = document.querySelector('.close');
         const leftArrow = document.querySelector('.arrow.left');
         const rightArrow = document.querySelector('.arrow.right');
 
-        const images = [
-            {
-                "AttachmentUri": "https://ahprd1cdn.csgpimgs.com/i2/GR9v6HEqG1hCymSMngGex3EBnTFXcN83VCOIzkCsXk0/119/image.jpg",
-            },
-            {
-                "AttachmentUri": "https://ahprd1cdn.csgpimgs.com/i2/VIgjNNv_GCOuWt4ZXxFkzqQdu1HARrHVfPr7MR2_4oc/119/image.jpg",
-            },
-            {
-                "AttachmentUri": "https://ahprd1cdn.csgpimgs.com/i2/D1Goua01-3YtKxdZUBfJtMNZrcflMyt23O2JOyFsJH8/119/image.jpg",
+        // Get the URL parameters
+        const params = new URLSearchParams(window.location.search);
+
+        // Populate the imageUrls array from the query parameters
+        params.forEach((url, key) => {
+            if (key.startsWith('img')) { // Only process parameters that start with 'img'
+                imageUrls.push(decodeURIComponent(url));
             }
-        ]; // Your images array
+        });
 
-        // Initialize imageUrls array and create image elements
-        images.forEach((imgObj, index) => {
-            imageUrls.push(imgObj.AttachmentUri);
-
+        // Create image elements and append them to the body
+        imageUrls.forEach((imgUrl, index) => {
             const img = document.createElement('img');
-            img.src = imgObj.AttachmentUri;
+            img.src = imgUrl;
 
             img.addEventListener('click', () => {
                 currentImageIndex = index; // Set the current index to the clicked image
