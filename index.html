@@ -13,20 +13,11 @@
             gap: 10px;
             padding: 20px;
         }
-        .image-container {
-            max-width: 75%; /* Limit the width of the container */
-            max-height: 500px; /* Limit the height of the container */
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            border: 1px solid #ccc; /* Apply border to the container */
-            box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.1);
-            overflow: hidden; /* Hide any overflow if the image is too large */
-        }
         img {
             max-width: 100%;
-            max-height: 100%;
-            object-fit: contain; /* Ensure the image scales to fit without distortion */
+            height: auto;
+            border: 1px solid #ccc;
+            box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.1);
         }
     </style>
 </head>
@@ -36,12 +27,7 @@
         params.forEach((url) => {
             const img = document.createElement('img');
             img.src = url;
-
-            const container = document.createElement('div');
-            container.className = 'image-container';
-            container.appendChild(img);
-
-            document.body.appendChild(container);
+            document.body.appendChild(img);
         });
     </script>
 </body>
